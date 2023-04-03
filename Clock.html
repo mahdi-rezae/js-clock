@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Clock</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            background-color: black;
+        }
+        .date {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: aqua;
+            margin: 20% 0 0 0;
+            font-size: 50px;
+        }
+
+        .time{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: aqua;
+            margin: 0 0 10% 0;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="date" id="date"></div>
+    <div class="time" id="time"></div>
+
+    <script>
+        let months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ];
+
+        function clock(){
+            let date = new Date();
+            let hour = date.getHours();
+            let min = date.getMinutes();
+            let sec = date.getSeconds();
+            let month = date.getMonth();
+            let day = date.getDay();
+            let year = date.getFullYear();
+
+            month = months[month];
+
+            let am = "AM";
+            if (hour > 12) {
+                hour -= 12;
+                am = "PM"
+            }
+
+            hour = (hour < 10) ? `0${hour}` : hour;
+
+            min = (min < 10) ? `0${min}` : min;
+            
+            sec = (sec < 10) ? `0${sec}` : sec;
+            
+            day = (day < 10) ? `0${day}` : day;
+
+            let timeContent = `${hour} : ${min} : ${sec} ${am}`;
+            let dateContent = `${month} ${day}     ${year}`;
+            document.getElementById('time').textContent = timeContent;
+            document.getElementById('date').textContent = dateContent;
+
+            setTimeout(clock, 1000);
+        }
+
+        clock();
+    </script>
+</body>
+</html>
